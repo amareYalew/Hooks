@@ -3,7 +3,15 @@
 import React, { Component ,useState, useEffect } from 'react'
 
 export default function Employe1() {
-   const [employee, setEmployee] = useState([])
+    const [employee, setEmployee] = useState([])
+    
+    useEffect(()=>{
+        var handle=setInterval(getEmployeesCount,5000);    
+    
+        return ()=>{
+          clearInterval(handle);
+        }
+      },[]);
     
     useEffect(() => {
         alert('hello')
@@ -14,6 +22,9 @@ export default function Employe1() {
         })
     }, [])
     
+    function getEmployeesCount(){
+      alert("feching Data")
+      }
 
     return (
         <div>
@@ -44,13 +55,3 @@ export default function Employe1() {
     )
 }
 
-useEffect(()=>{
-   
-    fetch("https://localhost:44306/api/Employee/"+searchText)
-      .then(res => res.json())
-      .then(
-        (result) => {
-          setEmployees(result);
-        }
-      );
-  },[searchText,employeeCount])
